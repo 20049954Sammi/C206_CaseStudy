@@ -14,7 +14,7 @@
  * OngYiZheng, Aug 2, 2021 8:09:26 PM
  */
 
-public class Test_YZ {
+public class EditStall {
 
 	/**
 	 * @param args
