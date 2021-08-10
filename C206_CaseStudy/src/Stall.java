@@ -16,13 +16,13 @@ import java.time.LocalDate;
  * OngYiZheng, Aug 2, 2021 8:09:26 PM
  */
 
-public class EditStall {
+public class Stall {
 
 	private int stallId;
 	private String stallName;
 	private LocalDate operationDate;
 
-	public EditStall(int stallId, String stallName, LocalDate operationDate) {
+	public Stall(int stallId, String stallName, LocalDate operationDate) {
 		this.stallId = stallId;
 		this.stallName = stallName;
 		this.operationDate = operationDate;
@@ -52,7 +52,12 @@ public class EditStall {
 		this.operationDate = operationDate;
 	}
 
-	
+	public String toString(){
+		String output = "";
+
+		output = String.format("%-10d%-20s%-20s\n", stallId,stallName ,operationDate);
+		return output;
+	}
 	
 
 }
