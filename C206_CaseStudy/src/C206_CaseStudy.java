@@ -13,6 +13,10 @@ public class C206_CaseStudy {
 		stallArray[1] = (new Stall(2, "Western Food Stall", LocalDate.parse("2018-10-05")));
 			
 		//
+		//Order
+		ArrayList<Order> orderList = new ArrayList<Order>();
+		orderList.add(new Order(1, "Rice", 4, LocalDate.parse("2018-12-5")));
+		orderList.add(new Order(2, "Vegetables", 6, LocalDate.parse("2018-02-15")));
 		
 		int option = 0;
 		while(option != 6) {
@@ -165,5 +169,113 @@ public class C206_CaseStudy {
 		}
 	}
 	
+	public static void order(ArrayList<Order> orderList) {
+		Helper.line(30, "-");
+		System.out.println("Manage Order");
+		Helper.line(30, "-");
+		
+		System.out.println("1. Add a new Order" );
+		System.out.println("2. View an existing orders " );
+		System.out.println("3. Delete an existing order" );
+		System.out.println("" );
+		
+		int option = Helper.readInt("Enter option: "); 
+		
+		if(option == 1) {
+			Order newOrder = inputOrder();
+			addOrder(orderList, newOrder);
+			
+		}else if(option == 2) {
+			viewAllOrders(orderList);
+			
+		}else if(option == 3) {
+			deleteOrder(orderList);
+
+		}else {
+			System.out.println("Wrong option, please try agian!!");
+
+		}
+	}
+	
+	public static Order inputOrder() {
+		Helper.line(30, "-");
+		System.out.println("Add Order");
+		Helper.line(30, "-");
+		
+		int orderID = Helper.readInt("Enter Order ID > ");
+		String orderName = Helper.readString("Enter Order Name > ");
+		int qty = Helper.readInt("Enter order quantity > ");
+		LocalDate orderDate = LocalDate.parse(Helper.readString("Enter Order Date > "));
+
+		Order neworder = new Order(orderID, orderName, qty , orderDate);
+		return neworder;
+		
+	}
+		
+	
+		public static void addOrder(ArrayList<Order> orderList, Order newOrder) {
+			
+			orderList.add(newOrder);
+			System.out.println("Order added");
+		}
+	
+	
+	//View stall
+	public static String retrieveAllOrders(ArrayList<Order> orderList) {
+		String output = "";
+		// write your code here
+		for (int i = 0; i < orderList.size(); i++) {
+			output += String.format("%-10d %-20s %-10d %-10s\n", orderList.get(i).getOrderID(), orderList.get(i).getOrderName(), orderList.get(i).getQuantity(), orderList.get(i).getEntryDate());
+					
+		}
+		return output;
+	}
+	
+	public static void viewAllOrders(ArrayList<Order> orderList) {
+		Helper.line(30, "-");
+		System.out.println("View Orders");
+		Helper.line(30, "-");
+		
+		String output = String.format("%-10s %-20s %-10s %-10s\n", "ID", "DESCRIPTION","Quantity", "Order date");
+		 output += retrieveAllOrders(orderList);
+		System.out.println(output);
+	}
+	
+	//Delete stall
+	public static boolean doDeleteOrder(ArrayList<Order> orderList, int orderID) {
+		boolean isDeleted = false;
+
+		for (int i = 0; i < orderList.size(); i++) {
+			if (orderID == orderList.get(i).getOrderID()){
+				orderList.remove(i);
+				isDeleted = true;
+			}
+		}
+		return isDeleted;
+		
+	}
+
+	public static void deleteOrder(ArrayList<Order> orderList) {
+		viewAllOrders(orderList);
+		int orderID = Helper.readInt("Enter order id > ");
+		Boolean isReturned = doDeleteOrder(orderList, orderID);
+		
+		if (isReturned == false) {
+			System.out.println("Invalid order ID");
+		} else {
+			System.out.println("Order with ID " + orderID + " deleted.");
+		}
+	}
+	
+	public static String showExist(boolean isThere) {
+		String exists;
+
+		if (isThere == true) {
+			exists = "Yes";
+		} else {
+			exists = "No";
+		}
+		return exists;
+	}
 
 }
