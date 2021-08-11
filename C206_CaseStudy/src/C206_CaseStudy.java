@@ -75,9 +75,7 @@ public class C206_CaseStudy {
 		
 		if(option == 1) {
 			Stall newStall = inputStall();
-			boolean checkStall = checkStall(stallList, newStall);
-			boolean checkStallNum = checkStallNum(stallList);
-			addStall(stallList, newStall, checkStall, checkStallNum);
+			addStall(stallList, newStall);
 			
 		}else if(option == 2) {
 			viewAllStall(stallList);
@@ -105,7 +103,10 @@ public class C206_CaseStudy {
 		return newStall;
 		
 	}
-	public static void addStall(Stall [] stallList, Stall newStall, boolean checkStall, boolean checkStallNum) {
+	public static void addStall(Stall [] stallList, Stall newStall) {
+		
+		boolean checkStall = checkStall(stallList, newStall);
+		boolean checkStallNum = checkStallNum(stallList);
 				
 		if(checkStall == true && checkStallNum == true){
 			for(int i = 0; i < stallList.length; i++) {
