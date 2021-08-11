@@ -69,13 +69,15 @@ public class C206_CaseStudy {
 		System.out.println("1. Add a new stall" );
 		System.out.println("2. View an existing stall " );
 		System.out.println("3. Delete an existing stall" );
-		System.out.println("" );
+		System.out.println("");
 		
 		int option = Helper.readInt("Enter option: "); 
 		
 		if(option == 1) {
 			Stall newStall = inputStall();
-			addStall(stallList, newStall);
+			boolean checkStall = checkStall(stallList, newStall);
+			boolean checkStallNum = checkStallNum(stallList);
+			addStall(stallList, newStall, checkStall, checkStallNum);
 			
 		}else if(option == 2) {
 			viewAllStall(stallList);
@@ -103,17 +105,48 @@ public class C206_CaseStudy {
 		return newStall;
 		
 	}
-	public static void addStall(Stall [] stallList, Stall newStall) {
-		
+	public static void addStall(Stall [] stallList, Stall newStall, boolean checkStall, boolean checkStallNum) {
+				
+		if(checkStall == true && checkStallNum == true){
+			for(int i = 0; i < stallList.length; i++) {
+				if(stallList[i] == null) {
+					stallList[i] = newStall;
+					System.out.println("New Stall Added");
+					break; 
+				}
+			}	
+		}else if(checkStallNum == false){
+			System.out.println("Stall Added Unsuccessful, total stalls in the canteen are full !!! ");
+
+		}else{
+			System.out.println("Stall Added Unsuccessful, Stall ID "+ newStall.getStallId() +" has been occupied in canteen !!! ");
+
+		}
+	}
+
+	public static boolean checkStall(Stall [] stallList, Stall newStall){
+		boolean check = true;
 		for(int i = 0; i < stallList.length; i++) {
-			if(stallList[i].equals(null)) {
-				stallList[i] = newStall;
-				System.out.println("New Stall Added");
-				break; 
-			}else {
-				System.out.println("Stall Added Unsuccessful, total stalls in the cafeteria are full !!! ");
+			if(stallList[i] != null ){
+				if(stallList[i].getStallId() == newStall.getStallId()) {
+					check = false;
+				}
 			}
 		}
+		
+		return check;
+	}
+	
+	public static boolean checkStallNum(Stall [] stallList){
+		boolean check = false;
+		
+		for(int i = 0; i < stallList.length; i++) {
+			if(stallList[i] == null) {
+				check = true;
+			}
+		}
+		
+		return check;
 	}
 	
 	//View stall
@@ -133,7 +166,7 @@ public class C206_CaseStudy {
 		System.out.println("View stall");
 		Helper.line(30, "-");
 		
-		String output = String.format("%-10s %-20s %-20s\n", "Stall ID", "Stall Name",
+		String output = String.format("%-15s%-25s%-25s\n", "Stall ID", "Stall Name",
 				"Stall Operation Date");
 		 output += seachAllSatll(stallList);	
 		System.out.println(output);
@@ -144,22 +177,24 @@ public class C206_CaseStudy {
 		boolean isReturned = false;
 
 		for (int i = 0; i < stallList.length; i++) {
-			if (StallID == stallList[i].getStallId()){
-				stallList[i] = null; 
-				isReturned = true;
+			if(stallList[i] != null){
+				if (StallID == stallList[i].getStallId()){
+					stallList[i] = null; 
+					isReturned = true;
+				}
 			}
 		}
 		return isReturned;
 		
 	}
 
-	public static void deleteStall(Stall [] camcorderList) {
-		viewAllStall(camcorderList);
-		int StallID = Helper.readInt("Enter asset tag > ");
-		Boolean isReturned = doDeleteStall(camcorderList, StallID);
+	public static void deleteStall(Stall [] stallList) {
+		viewAllStall(stallList);
+		int StallID = Helper.readInt("Enter Stall ID > ");
+		Boolean isReturned = doDeleteStall(stallList, StallID);
 		
 		if (isReturned == false) {
-			System.out.println("Invalid asset Stall ID");
+			System.out.println("Stall ID " +StallID+" not in the system!!!!");
 		} else {
 			System.out.println("Stall with " + StallID + " Delete!!!");
 		}

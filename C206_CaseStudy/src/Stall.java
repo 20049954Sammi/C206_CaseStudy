@@ -55,7 +55,7 @@ public class Stall {
 	public String toString(){
 		String output = "";
 
-		output = String.format("%-10d%-20s%-20s\n", stallId,stallName ,operationDate);
+		output = String.format("%-15d%-25s%-25s\n", stallId,stallName ,operationDate);
 		return output;
 	}
 	
