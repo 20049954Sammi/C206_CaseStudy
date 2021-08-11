@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -21,7 +22,15 @@ public class C206_CaseStudyTest {
 		stall1 = new Stall(1, "Chicken Rice Stall", LocalDate.parse("2018-12-12"));
 		stall2 = new Stall(2, "Western Food Stall", LocalDate.parse("2018-10-05"));
 		
-		//
+		//PromotionOffer
+        ArrayList<PromotionOffer> Promotionlist = new ArrayList<PromotionOffer>();
+		
+		Promotionlist.add(new PromotionOffer(1,"Promotion setA food item",0));
+		Promotionlist.add(new PromotionOffer(2,"Promotion setB food item",0));
+		Promotionlist.add(new PromotionOffer(3,"Promotion setC food item",0));
+		Promotionlist.add(new PromotionOffer(4,"Promotion setD food item",0));
+		Promotionlist.add(new PromotionOffer(5,"Promotion setE food item",0));
+		
 	}
 
 	@After
@@ -61,5 +70,8 @@ public class C206_CaseStudyTest {
 	
 		
 	}
+      
+		
+	
 
 }
