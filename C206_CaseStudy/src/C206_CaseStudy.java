@@ -220,7 +220,7 @@ public class C206_CaseStudy {
 		}
 	
 	
-	//View stall
+	//View order
 	public static String retrieveAllOrders(ArrayList<Order> orderList) {
 		String output = "";
 		// write your code here
@@ -241,7 +241,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 	
-	//Delete stall
+	//Delete order
 	public static boolean doDeleteOrder(ArrayList<Order> orderList, int orderID) {
 		boolean isDeleted = false;
 
