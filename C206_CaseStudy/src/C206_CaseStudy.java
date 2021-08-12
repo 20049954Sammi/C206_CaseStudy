@@ -241,7 +241,7 @@ public class C206_CaseStudy {
 			addPromotionOffer(Promotionlist, newPromotion,stallList );
 			
 		}else if(option == 2) {
-			viewAllPromotionOffer(Promotionlist);
+			System.out.println(viewAllPromotionOffer(Promotionlist));
 			
 		}else if(option == 3) {
 			deletePromotionOffer(Promotionlist);
@@ -308,11 +308,11 @@ public class C206_CaseStudy {
 			
 	
 		}
-		public static void viewAllPromotionOffer(ArrayList<PromotionOffer> Promotionlist) {
+		public static String viewAllPromotionOffer(ArrayList<PromotionOffer> Promotionlist) {
 			C206_CaseStudy.setHeader("Promotion Offer");
 			String output = String.format("%-15s %-30s %-25s\n", "PromotionCode", "FoodItem", "Stall-ID");
 			 output += AllPromotionOffer(Promotionlist);	
-			System.out.println(output);
+			return output;
 		}
 		
 		
@@ -322,7 +322,7 @@ public class C206_CaseStudy {
 
 		//detele Promotion offer (Sammi)
 		public static void deletePromotionOffer(ArrayList<PromotionOffer> Promotionlist) {
-			C206_CaseStudy.viewAllPromotionOffer(Promotionlist);
+		System.out.println(C206_CaseStudy.viewAllPromotionOffer(Promotionlist));
 			int StallID = Helper.readInt("Enter Stall ID > ");
 			int PromotionCode= Helper.readInt("Enter PromotionCode > ");
 			Boolean isReturned = deletePromotionOffer(Promotionlist, PromotionCode);
@@ -333,6 +333,7 @@ public class C206_CaseStudy {
 				System.out.println("PromotionCode in Stall-ID" + StallID + " has been remove");
 			}
 		}
+		
 		public static boolean deletePromotionOffer(ArrayList<PromotionOffer> Promotionlist,int PromotionCode ) {
 			boolean isReturned = false;
 
