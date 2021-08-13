@@ -12,7 +12,11 @@ public class C206_CaseStudy {
 		stallArray[0] = (new Stall(1, "Chicken Rice Stall", LocalDate.parse("2018-12-12")));
 		stallArray[1] = (new Stall(2, "Western Food Stall", LocalDate.parse("2018-10-05")));
 			
-		//
+		//food
+		ArrayList<food> foodList = new ArrayList<food>();
+		foodList.add(new food(1, "Chicken Rice", 3));
+		foodList.add(new food(2, "Chicken Chop", 5));
+		
 		
 		int option = 0;
 		while(option != 6) {
@@ -25,7 +29,7 @@ public class C206_CaseStudy {
 				stall(stallArray);
 				
 			}else if(option == 2) {
-				
+				food(foodList);
 			}else if(option == 3) {
 				
 			}else if(option == 4) {
@@ -38,10 +42,6 @@ public class C206_CaseStudy {
 			}else {
 				System.out.println("Wrong option, please try agian!!");
 			}
-			
-			
-			
-			
 		}
 
 	}
@@ -200,6 +200,106 @@ public class C206_CaseStudy {
 			System.out.println("Stall with " + StallID + " Delete!!!");
 		}
 	}
+	//food
 	
+	public static void food(ArrayList <food> foodList) {
+		
+		Helper.line(30, "-");
+		System.out.println("Manage food");
+		Helper.line(30, "-");
+		
+		System.out.println("1. Add a new food" );
+		System.out.println("2. View an existing food " );
+		System.out.println("3. Delete an existing food" );
+		System.out.println("");
+		
+		int option = Helper.readInt("Enter option: "); 
+		
+		if(option == 1) {
+			food newfood = inputfood();
+			addfood(foodList, newfood);
+			
+		}else if(option == 2) {
+			viewAllfood(foodList);
+			
+		}else if(option == 3) {
+			deletefoodinput(foodList);
+
+		}else {
+			System.out.println("Wrong option, please try agian!!");
+
+		}
+	}
+	
+	public static food inputfood() {
+		Helper.line(30, "-");
+		System.out.println("Add Food");
+		Helper.line(30, "-");
+		
+		int foodid = Helper.readInt("Enter food ID > ");
+		String food = Helper.readString("Enter food Name > ");
+		int price = Helper.readInt("Enter Price: > ");
+
+		food newfood= new food(foodid, food, price);
+		return newfood;
+	}
+
+	public static void addfood(ArrayList <food> foodList,food newfood) {
+		// TODO Auto-generated method stub
+		foodList.add(newfood);
+	}
+	
+	public static String retrieveAllfood(ArrayList<food> foodList) {
+		String output = "";
+
+		for (int i = 0; i < foodList.size(); i++) {
+
+			output += String.format("%-10s %-30s %-10s\n", foodList.get(i).getFood(),
+					foodList.get(i).getFoodid(), foodList.get(i).getPrice());	
+		}
+		return output;
+	}
+
+
+	public static void viewAllfood(ArrayList <food> foodList) {
+		// TODO Auto-generated method stub
+		C206_CaseStudy.setHeader("FOOD MENU");
+		String output = String.format("%-10s %-30s %-10s\n", "FOOD ID", "FOOD",
+				 "PRICE");
+		 output += retrieveAllfood(foodList);
+		System.out.println(output);
+	}
+	
+	private static void setHeader(String header) {
+		Helper.line(80, "-");
+		System.out.println(header);
+		Helper.line(80, "-");
+	}
+
+	public static boolean deletefood(ArrayList <food> foodList, int Foodid) {
+		// TODO Auto-generated method stub
+		boolean isReturned = false;
+
+		for (int i = 0; i < foodList.size(); i++) {
+			if(foodList.get(i).getFoodid() == Foodid) {
+			foodList.remove(i);
+			isReturned = true;
+			}
+		}
+		return isReturned;
+		
+	}
+	public static void deletefoodinput(ArrayList<food> foodList) {
+		retrieveAllfood(foodList);
+		int Foodid = Helper.readInt("Enter food ID > ");
+		Boolean isReturned = deletefood(foodList, Foodid);
+		
+		if (isReturned == false) {
+			System.out.println("Food is not removed");
+		} else {
+			System.out.println("Food " + Foodid + " returned");
+		}
+	}
 
 }
+
